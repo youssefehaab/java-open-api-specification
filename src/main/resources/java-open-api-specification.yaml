@@ -1,0 +1,114 @@
+openapi: '3.0.3'
+info:
+  title: Java OpenApi Specification
+  version: '1.0'
+tags:
+  - name: Teacher
+    description: Teacher's Information Management
+  - name: Student
+    description: Student's Information Management
+
+paths:
+  /teacher:
+    get:
+      tags:
+        - Teacher
+      summary: Get all teachers
+      operationId: getAllTeachers
+      responses:
+        '200':
+          description: successfully fetched all teachers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeacherList'
+    post:
+      tags:
+        - Teacher
+      summary: Update or insert teacher record
+      operationId: upsertTeacher
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Teacher'
+      responses:
+        '204':
+          description: updating or inserting a teacher record was successful
+
+  /student:
+    get:
+      tags:
+        - Student
+      summary: Get all students
+      operationId: getAllStudents
+      responses:
+        '200':
+          description: successfully fetched all students
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudentList'
+    post:
+      tags:
+        - Student
+      summary: Update or insert student record
+      operationId: upsertStudent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Student'
+      responses:
+        '204':
+          description: updating or inserting a student record was successful
+
+components:
+  schemas:
+    TeacherList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Teacher'
+
+    Teacher:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 1x2c3v4b5
+        name:
+          type: string
+          example: Paul Scholes
+        department:
+          type: string
+          example: Computer Science
+        dateOfBirth:
+          type: string
+          example: 30/10/1974
+        salary:
+          type: integer
+          format: int64
+          example: 74000
+
+    StudentList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Student'
+
+    Student:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 0q9w8e7r6
+        name:
+          type: string
+          example: Scott McTominay
+        department:
+          type: string
+          example: Computer Science
+        dateOfBirth:
+          type: string
+          example: 11/11/1911
